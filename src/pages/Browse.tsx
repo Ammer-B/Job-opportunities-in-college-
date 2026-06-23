@@ -68,6 +68,18 @@ function matchesLiveRole(job: LiveJob, role: RoleFilter): boolean {
   return true;
 }
 
+function matchesLiveJobType(job: LiveJob, jobType: JobTypeFilter): boolean {
+  if (jobType === 'all') return true;
+  const t = (job.title + ' ' + (job.location || '')).toLowerCase();
+  if (jobType === 'intern') return t.includes('intern');
+  if (jobType === 'full_time') return t.includes('full-time') || t.includes('full time');
+  if (jobType === 'part_time') return t.includes('part-time') || t.includes('part time');
+  if (jobType === 'remote') return t.includes('remote');
+  if (jobType === 'hybrid') return t.includes('hybrid');
+  if (jobType === 'on_site') return t.includes('on-site') || t.includes('on site') || t.includes('onsite') || t.includes('in-office') || t.includes('in office');
+  return true;
+}
+
 function applyFilters(internships: Internship[], search: string, region: RegionFilter, role: RoleFilter, jobType: JobTypeFilter, sort: SortKey): Internship[] {
   let r = internships;
 
