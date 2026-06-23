@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import type { Internship, ApplicationRecord, FilterState, SortKey, JobType } from '../types';
-import { JOB_TYPE_LABELS } from '../data/internships';
 import { updateStatus } from '../utils/storage';
 import { logoColor, regionCode } from '../App';
 import { getApiKey, fetchDailyBrowseJobs, LiveJob } from '../utils/jobsApi';
@@ -103,10 +102,10 @@ if (search.trim()) {
 
 const REGION_TABS: { id: RegionFilter; label: string }[] = [
   { id: 'all',  label: 'All Regions' },
-  { id: 'CA',   label: '🌉 California' },
-  { id: 'TX',   label: '⭐ Texas' },
-  { id: 'GCC',  label: '🌙 GCC' },
-  { id: 'AUNZ', label: '🦘 AU / NZ' },
+  { id: 'CA',   label: 'ð California' },
+  { id: 'TX',   label: 'â­ Texas' },
+  { id: 'GCC',  label: 'ð GCC' },
+  { id: 'AUNZ', label: 'ð¦ AU / NZ' },
 ];
 const ROLE_TABS: { id: RoleFilter; label: string }[] = [
   { id: 'all',         label: 'All Roles' },
@@ -208,7 +207,7 @@ export default function Browse({ internships, applications, onApply, onBulkApply
           className="search-input"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          placeholder="Search by role, company or location…"
+          placeholder="Search by role, company or locationâ¦"
         />
       </div>
 
@@ -328,7 +327,7 @@ export default function Browse({ internships, applications, onApply, onBulkApply
                     style={{ width: '100%' }}
                     onClick={() => applied ? onStatusChange(i.id, 'applied') : onApply(i)}
                   >
-                    {applied ? `✓ ${app.status.charAt(0).toUpperCase() + app.status.slice(1)}` : 'Apply Now'}
+                    {applied ? `â ${app.status.charAt(0).toUpperCase() + app.status.slice(1)}` : 'Apply Now'}
                   </button>
                 )}
               </div>
@@ -337,7 +336,7 @@ export default function Browse({ internships, applications, onApply, onBulkApply
         </div>
       )}
 
-      {/* ── Live Opportunities (daily rotation from API) ────────────────────── */}
+      {/* ââ Live Opportunities (daily rotation from API) ââââââââââââââââââââââ */}
       {liveJobs.length > 0 && !bulkMode && (
         <div style={{ marginTop: 48 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
@@ -349,7 +348,7 @@ export default function Browse({ internships, applications, onApply, onBulkApply
                 </span>
               </div>
               <p style={{ color: 'var(--t2)', fontSize: 13, margin: '4px 0 0', fontWeight: 500 }}>
-                Sourced from RemoteOK · Remotive · Jooble · The Muse &amp; more · refreshes every 24h
+                Sourced from RemoteOK Â· Remotive Â· Jooble Â· The Muse &amp; more Â· refreshes every 24h
               </p>
             </div>
           </div>
@@ -382,7 +381,7 @@ export default function Browse({ internships, applications, onApply, onBulkApply
                       </div>
                     )}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                      {j.location && <span style={{ fontSize: 11, color: 'var(--t2)' }}>📍 {j.location}</span>}
+                      {j.location && <span style={{ fontSize: 11, color: 'var(--t2)' }}>ð {j.location}</span>}
                       {j.salary && <span style={{ fontSize: 11, color: '#16893f', fontWeight: 600, background: 'rgba(22,163,74,0.08)', padding: '2px 8px', borderRadius: 100 }}>{j.salary}</span>}
                     </div>
                     <button
@@ -390,7 +389,7 @@ export default function Browse({ internships, applications, onApply, onBulkApply
                       style={{ width: '100%' }}
                       onClick={() => window.open(j.url, '_blank', 'noopener,noreferrer')}
                     >
-                      Apply Now →
+                      Apply Now â
                     </button>
                   </div>
                 );
@@ -412,7 +411,7 @@ export default function Browse({ internships, applications, onApply, onBulkApply
             onClick={handleBulkApply}
             style={{ background: 'var(--acc)', border: 'none', borderRadius: 100, padding: '9px 20px', color: '#fffaf2', fontSize: 13, fontWeight: 800, cursor: 'pointer', fontFamily: "'Syne',sans-serif", whiteSpace: 'nowrap', letterSpacing: 0.2 }}
           >
-            Apply to {selectedIds.size} →
+            Apply to {selectedIds.size} â
           </button>
         </div>
       )}
