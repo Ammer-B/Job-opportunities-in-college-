@@ -1,8 +1,9 @@
-﻿export type Region = 'texas' | 'california' | 'ksa' | 'uae' | 'qatar' | 'kuwait' | 'bahrain' | 'oman' | 'australia' | 'new_zealand';
+export type Region = 'texas' | 'california' | 'ksa' | 'uae' | 'qatar' | 'kuwait' | 'bahrain' | 'oman' | 'australia' | 'new_zealand';
 export type Industry = 'oil_gas' | 'semiconductor' | 'aerospace' | 'national_lab' | 'manufacturing' | 'mining';
 export type AppStatus = 'saved' | 'applied' | 'interview' | 'offer' | 'rejected';
 export type InternshipWindow = 'spring_2026' | 'fall_2026' | 'summer_2027';
 export type SortKey = 'composite' | 'pay_rate' | 'ease_of_entry' | 'future_benefits' | 'callback_percentage';
+export type JobType = 'intern' | 'full_time' | 'part_time' | 'remote' | 'hybrid' | 'on_site';
 
 export interface ScoreBreakdown {
   ease_of_entry: number;
@@ -20,6 +21,7 @@ export interface Internship {
   region: Region;
   industry: Industry[];
   windows: InternshipWindow[];
+  job_type: JobType[];
   deadline?: string;
   application_url: string;
   recruiter_email?: string;
@@ -52,6 +54,7 @@ export interface FilterState {
   regions: Region[];
   industries: Industry[];
   windows: InternshipWindow[];
+  job_types: JobType[];
   min_composite: number;
   search: string;
   sort_by: SortKey;
