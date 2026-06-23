@@ -18,11 +18,11 @@ const LIVE_SESSION_KEY = 'intern_live_session_v1';
 type Page = 'dashboard' | 'browse' | 'tracker' | 'analytics' | 'profile' | 'live';
 
 const DEFAULT_FILTERS: FilterState = {
-  regions: [], industries: [], windows: [],
+  regions: [], industries: [], windows: [], job_types: [],
   min_composite: 0, search: '', sort_by: 'composite', show_ksa_path_only: false,
 };
 
-// ── Logo color helper ──────────────────────────────────────────────────────
+// ââ Logo color helper ââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const LOGO_COLORS = ['#e0322f','#2563eb','#d97706','#16a34a','#7c3aed','#0d8478','#ea580c','#0891b2'];
 export function logoColor(name: string) {
   return LOGO_COLORS[name.charCodeAt(0) % LOGO_COLORS.length];
@@ -34,7 +34,7 @@ export function regionCode(region: string): string {
   return 'GCC';
 }
 
-// ── SVG icons (from InternTrack icon system — 24px grid, 2px round stroke) ──
+// ââ SVG icons (from InternTrack icon system â 24px grid, 2px round stroke) ââ
 const IconDash = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
@@ -74,7 +74,7 @@ const IconLogout = () => (
     <polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
   </svg>
 );
-// Climbing Pulse mark — from InternTrack brand design (heartbeat that rises)
+// Climbing Pulse mark â from InternTrack brand design (heartbeat that rises)
 const Logo = ({ size = 18, color = '#fffaf2' }: { size?: number; color?: string }) => (
   <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
     <path
@@ -93,7 +93,7 @@ const NAV: { id: Page; label: string; Icon: () => JSX.Element }[] = [
   { id: 'profile',   label: 'Profile',   Icon: IconProfile },
 ];
 
-// ── Auth Page ──────────────────────────────────────────────────────────────
+// ââ Auth Page ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function AuthPage({ onAuth }: { onAuth: () => void }) {
   const [isSignup, setIsSignup] = useState(true);
   const [name, setName]     = useState('');
@@ -116,7 +116,7 @@ function AuthPage({ onAuth }: { onAuth: () => void }) {
         <div style={{ position: 'relative' }}>
           <h1 className="syne" style={{ fontWeight: 800, fontSize: 40, lineHeight: 1.1, margin: '0 0 18px', letterSpacing: -0.5 }}>Land the internship you actually want.</h1>
           <p style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(255,255,255,0.85)', margin: '0 0 28px', maxWidth: 400 }}>
-            Search, apply and track every internship across California, Texas &amp; the GCC — all in one place.
+            Search, apply and track every internship across California, Texas &amp; the GCC â all in one place.
           </p>
           {['200+ live roles across 3 regions', 'One pipeline from applied to offer', 'Streaks & badges to keep you going'].map(t => (
             <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
@@ -128,7 +128,7 @@ function AuthPage({ onAuth }: { onAuth: () => void }) {
           ))}
         </div>
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: 14, padding: '14px 18px' }}>
-          <span style={{ fontSize: 26 }}>🔥</span>
+          <span style={{ fontSize: 26 }}>ð¥</span>
           <div>
             <div className="syne" style={{ fontWeight: 800, fontSize: 18, lineHeight: 1 }}>12,400+ students</div>
             <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.8)', marginTop: 3 }}>are tracking their hunt on InternTrack</div>
@@ -196,12 +196,12 @@ function AuthPage({ onAuth }: { onAuth: () => void }) {
             )}
             <div>
               <div style={{ fontSize: 11, color: 'var(--t2)', fontWeight: 700, letterSpacing: '0.4px', marginBottom: 6, textTransform: 'uppercase' }}>PASSWORD</div>
-              <input className="field" type="password" value={pass} onChange={e => setPass(e.target.value)} placeholder="••••••••" />
+              <input className="field" type="password" value={pass} onChange={e => setPass(e.target.value)} placeholder="â¢â¢â¢â¢â¢â¢â¢â¢" />
             </div>
           </div>
 
           <button className="btn-acc" style={{ width: '100%', padding: '13px', fontSize: 14 }} onClick={onAuth}>
-            {isSignup ? 'Create account' : 'Log in'} →
+            {isSignup ? 'Create account' : 'Log in'} â
           </button>
 
           {isSignup && (
@@ -218,7 +218,7 @@ function AuthPage({ onAuth }: { onAuth: () => void }) {
   );
 }
 
-// ── Sidebar ────────────────────────────────────────────────────────────────
+// ââ Sidebar ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function Sidebar({ page, onNav, onLogout }: { page: Page; onNav: (p: Page) => void; onLogout: () => void }) {
   return (
     <aside className="it-sidebar" style={{ width: 240, flexShrink: 0, background: 'var(--surf)', borderRight: '1px solid var(--bdr)', display: 'flex', flexDirection: 'column', padding: '20px 12px' }}>
@@ -243,7 +243,7 @@ function Sidebar({ page, onNav, onLogout }: { page: Page; onNav: (p: Page) => vo
           <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg,#e0322f,#f59e0b)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: 15, color: '#fff', flexShrink: 0 }}>A</div>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--t1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Ammer Boorenie</div>
-            <div style={{ fontSize: 11, color: 'var(--t3)' }}>Level 3 · 1,240 XP</div>
+            <div style={{ fontSize: 11, color: 'var(--t3)' }}>Level 3 Â· 1,240 XP</div>
           </div>
         </div>
         <div onClick={onLogout} title="Log out" style={{ width: 32, height: 32, borderRadius: 9, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--t3)', flexShrink: 0, border: '1px solid var(--bdr)' }}>
@@ -254,7 +254,7 @@ function Sidebar({ page, onNav, onLogout }: { page: Page; onNav: (p: Page) => vo
   );
 }
 
-// ── Bottom Nav ─────────────────────────────────────────────────────────────
+// ââ Bottom Nav âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function BottomNav({ page, onNav }: { page: Page; onNav: (p: Page) => void }) {
   return (
     <nav className="it-bnav" style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: 'rgba(255,253,249,0.92)', borderTop: '1px solid var(--bdr)', padding: '10px 8px', display: 'none', justifyContent: 'space-around', zIndex: 100, backdropFilter: 'blur(14px)' }}>
@@ -268,7 +268,7 @@ function BottomNav({ page, onNav }: { page: Page; onNav: (p: Page) => void }) {
   );
 }
 
-// ── Root App ───────────────────────────────────────────────────────────────
+// ââ Root App âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 export default function App() {
   const [authed, setAuthed]     = useState(() => localStorage.getItem('intern_session_v1') === '1');
   const [page, setPage]         = useState<Page>('dashboard');
@@ -288,7 +288,7 @@ export default function App() {
     localStorage.setItem('intern_session_v1', authed ? '1' : '0');
   }, [authed]);
 
-  // ── Background job poller — runs as long as user is authed, any page ──────
+  // ââ Background job poller â runs as long as user is authed, any page ââââââ
   const livePollIdx  = useRef(0);
   const liveSeenIds  = useRef(new Set<string>());
 
@@ -308,7 +308,7 @@ export default function App() {
     }
   }, []);
 
-  // JSearch — primary source, every 20s (quota_exceeded silently skipped — free sources cover it)
+  // JSearch â primary source, every 20s (quota_exceeded silently skipped â free sources cover it)
   useEffect(() => {
     if (!authed) return;
 
@@ -326,7 +326,7 @@ export default function App() {
       } catch (e: unknown) {
         const msg = e instanceof Error ? e.message : String(e);
         if (msg === 'quota_exceeded') {
-          // JSearch quota exhausted — free sources keep the feed alive; stay silent
+          // JSearch quota exhausted â free sources keep the feed alive; stay silent
           window.dispatchEvent(new CustomEvent('livejobs:poll', { detail: Date.now() }));
         } else {
           window.dispatchEvent(new CustomEvent('livejobs:status', { detail: 'error:' + msg }));
@@ -341,7 +341,7 @@ export default function App() {
     return () => { clearInterval(t); window.removeEventListener('livejobs:force-poll', onForcePoll); };
   }, [authed, processJobs]);
 
-  // RemoteOK — free, no key, every 2 minutes, reports 'connected' when jobs arrive
+  // RemoteOK â free, no key, every 2 minutes, reports 'connected' when jobs arrive
   useEffect(() => {
     if (!authed) return;
     const poll = async () => {
@@ -357,7 +357,7 @@ export default function App() {
     return () => { clearTimeout(delay); clearInterval(t); };
   }, [authed, processJobs]);
 
-  // ── NA poller: Remotive + TheMuse + Jobicy + RemoteOK (every 3 min) ─────
+  // ââ NA poller: Remotive + TheMuse + Jobicy + RemoteOK (every 3 min) âââââ
   const naRemotiveIdx = useRef(0);
   const naMuseIdx     = useRef(0);
   const naJobicyIdx   = useRef(0);
@@ -389,7 +389,7 @@ export default function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authed, processJobs]);
 
-  // ── MENA poller: Jooble GCC queries (every 5 min) ────────────────────────
+  // ââ MENA poller: Jooble GCC queries (every 5 min) ââââââââââââââââââââââââ
   const MENA_QUERIES = [
     { keywords: 'engineering internship 2025', location: 'Saudi Arabia' },
     { keywords: 'engineering internship', location: 'UAE' },
@@ -421,7 +421,7 @@ export default function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authed, processJobs]);
 
-  // ── AU/NZ poller: Jooble AU/NZ + Adzuna (12-hr cooldown) ─────────────────
+  // ââ AU/NZ poller: Jooble AU/NZ + Adzuna (12-hr cooldown) âââââââââââââââââ
   const AUNZ_JOOBLE = [
     { keywords: 'engineering internship 2025', location: 'Australia' },
     { keywords: 'engineering internship', location: 'New Zealand' },
@@ -468,7 +468,7 @@ export default function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authed, processJobs]);
 
-  // ── Watchdog: if no poll event in 45s, force an immediate JSearch poll ───
+  // ââ Watchdog: if no poll event in 45s, force an immediate JSearch poll âââ
   const lastPollEventRef = useRef(Date.now());
   useEffect(() => {
     if (!authed) return;
