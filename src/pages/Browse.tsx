@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import type { Internship, ApplicationRecord, FilterState, SortKey } from '../types';
+import type { Internship, ApplicationRecord, FilterState, SortKey, JobType } from '../types';
+import { JOB_TYPE_LABELS } from '../data/internships';
 import { updateStatus } from '../utils/storage';
 import { logoColor, regionCode } from '../App';
 import { getApiKey, fetchDailyBrowseJobs, LiveJob } from '../utils/jobsApi';
@@ -67,7 +68,7 @@ function matchesLiveRole(job: LiveJob, role: RoleFilter): boolean {
   return true;
 }
 
-function applyFilters(internships: Internship[], search: string, region: RegionFilter, role: RoleFilter, sort: SortKey): Internship[] {
+function applyFilters(internships: Internship[], search: string, region: RegionFilter, role: RoleFilter, jobType: JobTypeFilter, sort: SortKey): Internship[] {
   let r = internships;
 
   if (region !== 'all') r = r.filter(i => regionCode(i.region) === region);
@@ -76,7 +77,11 @@ function applyFilters(internships: Internship[], search: string, region: RegionF
     r = r.filter(i => i.industry.some(ind => ROLE_INDUSTRIES[role].includes(ind)));
   }
 
-  if (search.trim()) {
+  if (jobType !== 'all') {
+r = r.filter(i => i.job_type && i.job_type.includes(jobType as JobType));
+}
+
+if (search.trim()) {
     const q = search.toLowerCase();
     r = r.filter(i =>
       i.company.toLowerCase().includes(q) ||
@@ -122,7 +127,7 @@ export default function Browse({ internships, applications, onApply, onBulkApply
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [liveJobs,    setLiveJobs]    = useState<LiveJob[]>([]);
 
-  const visible = applyFilters(internships, search, regionTab, roleTab, 'composite');
+  const visible = applyFilters(internships, search, regionTab, roleTab, jobTypeTab, 'composite');
 
   useEffect(() => {
     const profile = loadProfile();
@@ -350,7 +355,7 @@ export default function Browse({ internships, applications, onApply, onBulkApply
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))', gap: 14 }}>
             {liveJobs
-              .filter(j => matchesLiveRegion(j, regionTab) && matchesLiveRole(j, roleTab))
+              .filter(j => matchesLiveRegion(j, regionTab) && matchesLiveRole(j, roleTab) && matchesLiveJobType(j, jobTypeTab))
               .map(j => {
                 const color = logoColor(j.company || 'J');
                 return (
