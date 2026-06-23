@@ -1,6 +1,6 @@
-﻿import { SlidersHorizontal, X } from 'lucide-react';
-import type { FilterState, Region, Industry, InternshipWindow, SortKey } from '../types';
-import { REGION_LABELS, INDUSTRY_LABELS, WINDOW_LABELS } from '../data/internships';
+ï»¿import { SlidersHorizontal, X } from 'lucide-react';
+import type { FilterState, Region, Industry, InternshipWindow, SortKey, JobType } from '../types';
+import { REGION_LABELS, INDUSTRY_LABELS, WINDOW_LABELS, JOB_TYPE_LABELS } from '../data/internships';
 
 interface Props {
   filters: FilterState;
@@ -30,9 +30,9 @@ export default function FilterSidebar({ filters, onChange, total, visible }: Pro
   const toggleWindow   = (w: InternshipWindow)  => onChange({ ...filters, windows:    filters.windows.includes(w)    ? filters.windows.filter(x => x !== w)    : [...filters.windows, w] });
 
   const hasFilters = filters.regions.length > 0 || filters.industries.length > 0 ||
-    filters.windows.length > 0 || filters.min_composite > 0 || filters.search || filters.show_ksa_path_only;
+    filters.windows.length > 0 || filters.job_types.length > 0 || filters.min_composite > 0 || filters.search || filters.show_ksa_path_only;
 
-  const clear = () => onChange({ regions: [], industries: [], windows: [], min_composite: 0, search: '', sort_by: 'composite', show_ksa_path_only: false });
+  const clear = () => onChange({ regions: [], industries: [], windows: [], job_types: [], min_composite: 0, search: '', sort_by: 'composite', show_ksa_path_only: false });
 
   return (
     <aside className="w-60 shrink-0 bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-5 h-fit sticky top-20">
