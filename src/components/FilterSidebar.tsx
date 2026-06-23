@@ -1,4 +1,4 @@
-ï»¿import { SlidersHorizontal, X } from 'lucide-react';
+import { SlidersHorizontal, X } from 'lucide-react';
 import type { FilterState, Region, Industry, InternshipWindow, SortKey, JobType } from '../types';
 import { REGION_LABELS, INDUSTRY_LABELS, WINDOW_LABELS, JOB_TYPE_LABELS } from '../data/internships';
 
