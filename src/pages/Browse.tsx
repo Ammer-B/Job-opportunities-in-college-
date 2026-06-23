@@ -18,6 +18,7 @@ interface Props {
 
 type RegionFilter = 'all' | 'CA' | 'TX' | 'GCC' | 'AUNZ';
 type RoleFilter   = 'all' | 'engineering' | 'data' | 'product' | 'business';
+type JobTypeFilter = 'all' | 'intern' | 'full_time' | 'part_time' | 'remote' | 'hybrid' | 'on_site';
 
 const ROLE_INDUSTRIES: Record<RoleFilter, string[]> = {
   all:         [],
@@ -120,6 +121,7 @@ export default function Browse({ internships, applications, onApply, onBulkApply
   const [regionTab,   setRegionTab]   = useState<RegionFilter>(() => (sessionStorage.getItem('br_region') as RegionFilter) ?? 'all');
   const [roleTab,     setRoleTab]     = useState<RoleFilter>(() => (sessionStorage.getItem('br_role') as RoleFilter) ?? 'all');
   const [savedSet,    setSavedSet]    = useState<Set<string>>(
+  const [jobTypeTab, setJobTypeTab] = useState<JobTypeFilter>(() => (sessionStorage.getItem('br_jobtype') as JobTypeFilter) ?? 'all');
     () => new Set(Object.entries(applications).filter(([,a]) => a.status === 'saved').map(([id]) => id))
   );
   const [bulkMode,    setBulkMode]    = useState(false);
