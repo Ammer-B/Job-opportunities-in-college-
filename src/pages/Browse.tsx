@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import type { Internship, ApplicationRecord, FilterState, SortKey, JobType } from '../types';
-import { JOB_TYPE_LABELS } from '../data/internships';
 import { updateStatus } from '../utils/storage';
 import { logoColor, regionCode } from '../App';
 import { getApiKey, fetchDailyBrowseJobs, LiveJob } from '../utils/jobsApi';
